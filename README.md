@@ -83,6 +83,7 @@ EOF
   k3d {
     disable_load_balancer     = false
     disable_image_volume      = false
+    timeout                   = "5m"
   }
 
   k3s {

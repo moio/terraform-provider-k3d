@@ -82,6 +82,7 @@ EOF
   k3d {
     disable_load_balancer = false
     disable_image_volume  = false
+    timeout               = "5m"
   }
 
   k3s {
@@ -152,6 +153,7 @@ Optional:
 
 - `disable_image_volume` (Boolean) Disable the creation of a volume for importing images.
 - `disable_load_balancer` (Boolean) Disable the creation of a LoadBalancer in front of the server nodes.
+- `timeout` (String, duration) Maximum waiting time for nodes to be up (default: '60s').
 
 
 <a id="nestedblock--k3s"></a>
@@ -272,5 +274,3 @@ Read-Only:
 - `cluster_ca_certificate` (String)
 - `host` (String)
 - `raw` (String)
-
-

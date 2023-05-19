@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -134,6 +135,12 @@ func resourceCluster() *schema.Resource {
 							ForceNew:    true,
 							Optional:    true,
 							Type:        schema.TypeBool,
+						},
+						"timeout": {
+							Description: "Maximum waiting time for nodes to be up (default: '60s')",
+							ForceNew:    true,
+							Optional:    true,
+							Type:        schema.TypeString,
 						},
 					},
 				},
@@ -599,6 +606,7 @@ func expandConfigOptionsK3d(l []interface{}) v1alpha4.SimpleConfigOptionsK3d {
 	in := l[0].(map[string]interface{})
 	opts.DisableImageVolume = in["disable_image_volume"].(bool)
 	opts.DisableLoadbalancer = in["disable_load_balancer"].(bool)
+	opts.Timeout, _ = time.ParseDuration(in["timeout"].(string))
 
 	return opts
 }
