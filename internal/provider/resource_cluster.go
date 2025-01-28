@@ -10,7 +10,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	types2 "github.com/k3d-io/k3d/v5/pkg/config/types"
 	"github.com/k3d-io/k3d/v5/pkg/config/v1alpha5"
-
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 
@@ -498,7 +497,8 @@ func getSimpleConfig(d *schema.ResourceData) *v1alpha5.SimpleConfig {
 
 func getClusterConfig(ctx context.Context, simpleConfig v1alpha5.SimpleConfig) (*v1alpha5.ClusterConfig, error) {
 	// transform simple config to cluster config
-	clusterConfig, err := config.TransformSimpleToClusterConfig(ctx, runtimes.SelectedRuntime, simpleConfig)
+	configFileName := "" // new embedded and external config files is not supported: https://github.com/k3d-io/k3d/pull/1417
+	clusterConfig, err := config.TransformSimpleToClusterConfig(ctx, runtimes.SelectedRuntime, simpleConfig, configFileName)
 	if err != nil {
 		return nil, err
 	}
