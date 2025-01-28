@@ -5,7 +5,7 @@ This provider manages [k3d](https://k3d.io) Kubernetes clusters.
 ## Requirements
 
 -	[Terraform](https://www.terraform.io/downloads.html) >= 0.13.x
--	[Go](https://golang.org/doc/install) >= 1.18
+-	[Go](https://golang.org/doc/install) >= 1.22.4
 
 ## Using the provider
 
